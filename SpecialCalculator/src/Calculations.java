@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 
 interface Operator {
-	int operator(int first, int second);
+	float binaryOperator(float first, float second);
 }
 
 public class Calculations {
@@ -12,8 +12,20 @@ public class Calculations {
 		List<Integer> inputList = Arrays.asList(
 			new Integer[] {first, second, third}
 		);
-		List<String> representations = new ArrayList<>();
 		List<List<Integer>> permutations = Permutator.getPermutations(inputList);
+		return getRepresentationsFromPermutations(permutations);
+	}
+	
+	public static List<String> getArithmeticRepresentations(int first, int second, int third, int fourth) {
+		List<Integer> inputList = Arrays.asList(
+				new Integer[] {first, second, third, fourth}
+			);
+		List<List<Integer>> permutations = Permutator.getPermutations(inputList);
+		return getRepresentationsFromPermutations(permutations);
+	}
+	
+	private static List<String> getRepresentationsFromPermutations(List<List<Integer>> permutations) {
+		List<String> representations = new ArrayList<>();
 		for(List<Integer> numbers : permutations) {
 			int firstNumber = numbers.get(0);
 			int secondNumber = numbers.get(1);
@@ -35,26 +47,26 @@ public class Calculations {
 	}
 	
 	private static boolean numberOperates(int first, int second, int third, Operator o) {
-		return o.operator(first, second) == third;
+		return o.binaryOperator(first, second) == third;
 	}
 	
 	private static String operatorRepresentation(int first, int second, int third, String operator) {
 		return first + " " + operator + " " + second + " = " + third;
 	}
 	
-	private static int add(int first, int second) {
+	private static float add(float first, float second) {
 		return first + second;
 	}
 	
-	private static int subtract(int first, int second) {
+	private static float subtract(float first, float second) {
 		return first - second;
 	}
 	
-	private static int multiply(int first, int second) {
+	private static float multiply(float first, float second) {
 		return first * second;
 	}
 	
-	private static int divide(int first, int second) {
+	private static float divide(float first, float second) {
 		return first / second;
 	}
 	

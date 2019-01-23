@@ -9,6 +9,9 @@ public class Permutator {
 		if (numbers.size() == 3) {
 			return permuteListOf3(numbers);
 		}
+		if (numbers.size() == 4) {
+			return permuteListOf4(numbers);
+		}
 		throw new InvalidParameterException("Numbers list was too short");
 	}
 	
@@ -32,5 +35,46 @@ public class Permutator {
 		}
 		return result;
 	}
+	
+	private static List<List<Integer>> permuteListOf4(List<Integer> numbers) {
+		if (numbers.size() != 4) {
+			throw new InvalidParameterException("Numbers list was too short");
+		}
+		int first = numbers.get(0);
+		int second = numbers.get(1);
+		int third = numbers.get(2);
+		int fourth = numbers.get(3);
+		
+		List<Integer> firstList = Arrays.asList(
+			new Integer[] {first, second, third}
+		);
+		
+		List<Integer> secondList = Arrays.asList(
+				new Integer[] {first, second, fourth}
+		);
+		
+		List<Integer> thirdList = Arrays.asList(
+				new Integer[] {first, third, fourth}
+		);
+		
+		List<Integer> fourthList = 	Arrays.asList(
+				new Integer[] {second, third, fourth}
+		);
+		
+		List<List<Integer>> firstPermutations = permuteListOf3(firstList);
+		List<List<Integer>> secondPermutations = permuteListOf3(secondList);
+		List<List<Integer>> thirdPermutations = permuteListOf3(thirdList);
+		List<List<Integer>> fourthPermutations = permuteListOf3(fourthList);
+		
+		List<List<Integer>> result = new ArrayList<>();
+		result.addAll(firstPermutations);
+		result.addAll(secondPermutations);
+		result.addAll(thirdPermutations);
+		result.addAll(fourthPermutations);
+		
+		return result;
+	}
+	
+	
 	
 }
